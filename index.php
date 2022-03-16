@@ -11,8 +11,14 @@ Author: Ben Rothman
 Version: 1.0.0
 Author URI: https://benrothman.org
 */
-add_action('wp_enqueue_scripts', 'qg_enqueue');
-function filter_plugin_name( $plugins ) {
+/**
+ * Display the Plugins git branch on the plugins.php plugin table
+ *
+ * @param  array $plugins Array of install plugin data.
+ *
+ * @return array          Filtered array of installed plugins data.
+ */
+function show_plugin_git_branch( $plugins ) {
 
 	$screen = get_current_screen();
 
@@ -24,15 +30,27 @@ function filter_plugin_name( $plugins ) {
 
 	foreach ( $plugins as $path => &$data ) {
 
-		$path = substr( $path, 0, strpos( $path, '/' ) ) . '/.git/HEAD';
+		if ( ! file_exists( trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD' ) ) {
 
-		$branch = file_get_contents( $path );
+			continue;
 
-		$data['Name'] = $data['Name'] . ' (branch: ' . $branch . ')';
+		}
+
+		$head = file_get_contents( trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD' );
+
+		if ( ! $head ) {
+
+			continue;
+
+		}
+
+		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
+
+		$data['Name'] = $data['Name'] . " (Branch: ${branch})";
 
 	}
 
 	return $plugins;
 
 }
-add_filter( 'all_plugins', 'filter_plugin_name', PHP_INT_MAX );
+add_filter( 'all_plugins', 'show_plugin_git_branch', PHP_INT_MAX );
