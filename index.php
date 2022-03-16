@@ -5,7 +5,7 @@
  */
 /*
 Plugin Name: Brancher
-Plugin URI: http://wordpress.org/plugins/hello-dolly/
+Plugin URI: none
 Description: A plugin that when activated shows the current branch of other plugins.
 Author: Ben Rothman
 Version: 1.0.0
