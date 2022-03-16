@@ -4,13 +4,14 @@
  * @version 1.0.0
  */
 /*
-Plugin Name: Brancher
-Plugin URI: none
-Description: A plugin that when activated shows the current branch of other plugins.
-Author: Ben Rothman
-Version: 1.0.0
-Author URI: https://benrothman.org
-*/
+ * Plugin Name: Brancher
+ * Plugin URI: none
+ * Description: A plugin that when activated shows the current branch of other plugins.
+ * Author: Ben Rothman
+ * Version: 1.0.0
+ * Author URI: https://benrothman.org
+ */
+
 /**
  * Display the Plugins git branch on the plugins.php plugin table
  *
@@ -30,13 +31,15 @@ function show_plugin_git_branch( $plugins ) {
 
 	foreach ( $plugins as $path => &$data ) {
 
-		if ( ! file_exists( trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD' ) ) {
+		$file = trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD';
+
+		if ( ! file_exists( $file ) ) {
 
 			continue;
 
 		}
 
-		$head = file_get_contents( trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD' );
+		$head = file_get_contents( $file );
 
 		if ( ! $head ) {
 
