@@ -7,7 +7,7 @@
  * Plugin Name: Brancher
  * Plugin URI: none
  * Description: A plugin that when activated shows the current branch of other plugins.
- * Author: Ben Rothman
+ * Author: Ben Rothman and Evan Herman
  * Version: 1.0.0
  * Author URI: https://benrothman.org
  */
