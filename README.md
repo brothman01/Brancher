@@ -1,2 +1,2 @@
 # Brancher
-A plugins that shows the current branch of all other plugins on a WordPress site.
+A simple plugin that, when activated, shows the current branch of other plugins that use github.

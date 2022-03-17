@@ -6,14 +6,14 @@
 /*
  * Plugin Name: Brancher
  * Plugin URI: none
- * Description: A plugin that when activated shows the current branch of other plugins.
+ * Description: A simple plugin that, when activated, shows the current branch of other plugins that use github.
  * Author: Ben Rothman and Evan Herman
  * Version: 1.0.0
  * Author URI: https://benrothman.org
  */
 
 /**
- * Display the Plugins git branch on the plugins.php plugin table
+ * Display the Plugin's git branch on the plugins.php plugin table
  *
  * @param  array $plugins Array of install plugin data.
  *
