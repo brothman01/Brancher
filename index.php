@@ -49,7 +49,7 @@ function show_plugin_git_branch( $plugins ) {
 
 		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
 
-		$data['Name'] = $data['Name'] . " (Branch: ${branch})";
+		$data['Name'] = $data['Name'] . ' <em>(Branch: ' . $branch .')</em>';
 
 	}
 
