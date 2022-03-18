@@ -18,6 +18,8 @@
  * @param  array $plugins Array of install plugin data.
  *
  * @return array          Filtered array of installed plugins data.
+ * 
+ * @since 1.0.0
  */
 function show_plugin_git_branch( $plugins ) {
 
