@@ -17,10 +17,23 @@
  *
  * @param  array $plugins Array of install plugin data.
  *
- * @return array          Filtered array of installed plugins data.
+ * @return array Filtered array of installed plugins data.
  * 
  * @since 1.0.0
  */
+// declare function if < PHP 8  is installed
+if (!function_exists('str_starts_with')) {
+    function str_starts_with($haystack, $needle) {
+        return (string)$needle !== '' && strncmp($haystack, $needle, strlen($needle)) === 0;
+    }
+}
+
+if (!function_exists('str_contains')) {
+    function str_contains($haystack, $needle) {
+        return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+    }
+}
+
 function show_plugin_git_branch( $plugins ) {
 
 	$screen = get_current_screen();
@@ -49,9 +62,23 @@ function show_plugin_git_branch( $plugins ) {
 
 		}
 
+		// execute git status to find out if branch is last commit
+		$output = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git status' );
+
+		if( $output == "command 'git' not found.") {
+			$output = 'no git'; // no git installed
+		} else if ( str_contains( $output, 'Your branch is up to date') ) {
+			$output = 'latest'; // latest commit
+		} else {
+			$output = 'stale'; // not the latest commit
+		}
+		
+
+		// read head to get branch name
 		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
 
-		$data['Name'] = $data['Name'] . ' <em>(Branch: ' . $branch .')</em>';
+		// print plugin name + git info
+		$data['Name'] = $data['Name'] . ' <em>(Status:' . $output . ' Branch: ' . $branch .')</em>';
 
 	}
 
@@ -59,3 +86,12 @@ function show_plugin_git_branch( $plugins ) {
 
 }
 add_filter( 'all_plugins', 'show_plugin_git_branch', PHP_INT_MAX );
+
+/**
+ * Proper way to enqueue scripts and styles
+ */
+function wpdocs_theme_name_scripts() {
+    wp_enqueue_style( 'brancher-style', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'brancher.css' );
+    // wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
+}
+add_action( 'admin_enqueue_scripts', 'wpdocs_theme_name_scripts' );
