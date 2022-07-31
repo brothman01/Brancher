@@ -68,7 +68,7 @@ function show_plugin_git_branch( $plugins ) {
 		if( $output == "command 'git' not found.") {
 			$output = 'no git'; // no git installed
 		} else if ( str_contains( $output, 'Your branch is up to date') ) {
-			$output = '✅ '; // latest commit
+			$output = '✅  '; // latest commit
 		} else {
 			$output = '⚠️ '; // not the latest commit
 		}
