@@ -68,9 +68,9 @@ function show_plugin_git_branch( $plugins ) {
 		if( $output == "command 'git' not found.") {
 			$output = 'no git'; // no git installed
 		} else if ( str_contains( $output, 'Your branch is up to date') ) {
-			$output = 'latest'; // latest commit
+			$output = '✅ '; // latest commit
 		} else {
-			$output = 'stale'; // not the latest commit
+			$output = '⚠️ '; // not the latest commit
 		}
 		
 
@@ -78,7 +78,7 @@ function show_plugin_git_branch( $plugins ) {
 		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
 
 		// print plugin name + git info
-		$data['Name'] = $data['Name'] . ' <em>(Status:' . $output . ' Branch: ' . $branch .')</em>';
+		$data['Name'] = $output . ' ' . $data['Name'] . ' <em>(Status:' . $output . ' Branch: ' . $branch .')</em>';
 
 	}
 
