@@ -55,16 +55,17 @@ function show_plugin_git_branch( $plugins ) {
 		}
 
 		$head = file_get_contents( $file );
-
+		
 		if ( ! $head ) {
 
 			continue;
 
 		}
 
-		// execute git status to find out if branch is last commit
-		$check_local = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git status' );
+		$no_git = false;
 
+		// execute git shell commands
+		$check_local = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git status' );
 		$check_remote = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git remote show origin' );
 		
 		// check for git
