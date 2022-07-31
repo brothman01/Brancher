@@ -92,7 +92,7 @@ function show_plugin_git_branch( $plugins ) {
 		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
 
 		// print plugin name + git info
-		$data['Name'] = $output . ' ' . $data['Name'] . ' <em>(Status:' . $output . ' Branch: ' . $branch .')</em>';
+		$data['Name'] = $output . '&nbsp;' . $data['Name'] . ' <em>(Branch: ' . $branch .')</em>';
 
 	}
 
