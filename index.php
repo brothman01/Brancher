@@ -63,16 +63,29 @@ function show_plugin_git_branch( $plugins ) {
 		}
 
 		// execute git status to find out if branch is last commit
-		$output = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git status' );
+		$check_local = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git status' );
 
-		if( $output == "command 'git' not found.") {
-			$output = 'no git'; // no git installed
-		} else if ( str_contains( $output, 'Your branch is up to date') ) {
-			$output = '✅  '; // latest commit
-		} else {
-			$output = '⚠️ '; // not the latest commit
-		}
+		$check_remote = shell_exec( 'cd ' . trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) . ' && ' . 'git remote show origin' );
 		
+		// check for git
+		if( str_contains( $check_local, "command 'git' not found." )) {
+			$no_git = true; // no git installed
+		}
+		if ( ! $no_git ) {
+			// check local
+			if ( str_contains( $check_local, 'Your branch is up to date') ) {
+				$output = '✅  '; // clean local files
+			} else {
+				$output = '⚠️ '; // local files changed
+			}
+			
+			// remote check
+			if ( str_contains( $check_remote, 'local out of date') ) {
+				$output = '⚠️ '; // remote changed
+			} else {
+				$output = '✅  '; // up to date with remote
+			}
+		}
 
 		// read head to get branch name
 		$branch = trim( basename( str_replace( 'ref: ', '', $head ) ) );
