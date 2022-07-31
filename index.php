@@ -44,6 +44,13 @@ function show_plugin_git_branch( $plugins ) {
 
 	}
 
+	echo '<style>
+	em {
+		font-size: 11px;
+		color: purple;
+	}
+	</style>';
+
 	foreach ( $plugins as $path => &$data ) {
 
 		$file = trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . dirname( $path ) ) . '.git/HEAD';
@@ -100,12 +107,3 @@ function show_plugin_git_branch( $plugins ) {
 
 }
 add_filter( 'all_plugins', 'show_plugin_git_branch', PHP_INT_MAX );
-
-/**
- * Proper way to enqueue scripts and styles
- */
-function wpdocs_theme_name_scripts() {
-    wp_enqueue_style( 'brancher-style', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'brancher.css' );
-    // wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
-}
-add_action( 'admin_enqueue_scripts', 'wpdocs_theme_name_scripts' );
