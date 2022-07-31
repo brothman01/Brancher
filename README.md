@@ -1,7 +1,7 @@
 <h1 align="center">Brancher
 	<img src="https://img.shields.io/static/v1?ConciergeWPVersion=&message=v0.1&label=&color=999&style=flat-square">
 </h1>
-<h4>Contributors: Ben Rothman and Evan Herman</h4>
+<h4>Contributors: Ben Rothman (brothman01) and Evan Herman (eherman24)</h4>
 <h4 align="center">Just a simple <a href="https://wordpress.org" target="_blank">WordPress</a> plugin to see which git branch each of your plugins is on.  This plugin is lightweight and has no settings.</h4>
 
 <p align="center">
