@@ -1,8 +1,8 @@
 <h1 align="center">Brancher
-	<img src="https://img.shields.io/static/v1?ConciergeWPVersion=&message=v0.1&label=&color=999&style=flat-square">
+	<img src="https://img.shields.io/static/v1?ConciergeWPVersion=&message=v1.0.0&label=&color=999&style=flat-square">
 </h1>
 <h4>Contributors: Ben Rothman (brothman01) and Evan Herman (eherman24)</h4>
-<h4 align="center">Just a simple <a href="https://wordpress.org" target="_blank">WordPress</a> plugin to see which git branch each of your plugins is on.  This plugin is lightweight and has no settings.</h4>
+<h4 align="center">Just a simple <a href="https://wordpress.org" target="_blank">WordPress</a> plugin to see the status of any plugin managed by git at a glance.</h4>
 
 <p align="center">
 	<a href="https://wordpress.org/" target="_blank">
@@ -20,7 +20,9 @@
 - Enjoy :)
 
 ## Initial Setup
-Simply install and activate the plugin and the next time you look at your plugins page, it will list the git branch along with the plugin name of each plugin that uses git.
+Simply install and activate the plugin and the next time you look at your plugins page, it will list have an icon next to each branch showing it's status relative to the repository and the name of the git branch along with the plugin name of each plugin that uses git.  The checkmark icon next to a plugin means that it is up to date with the branch it is on and the yellow alert icon means that the local code is out of sync with the current branch.
+
+NOTE: if your server does not have git installed the plugin will not work.
 
 ## License
 This plugin, like WordPress, is licensed under the GPL. Use it to make something cool, have fun, and share what you've learned with others.
